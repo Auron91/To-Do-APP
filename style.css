@@ -53,11 +53,14 @@ body {
     padding: 10px;
     margin-top: 5px;
     transition: transform .3s;
+    cursor: pointer;
 }
 
-.task input {
-    margin: 5px 10px;
-    cursor: pointer;
+.task-content i {
+    margin: 5px 5px;
+}
+.task-completed span {
+    text-decoration: line-through;
 }
 .task:hover {
     transform: scale(1.03);
@@ -68,6 +71,7 @@ body {
 .modify-task {
     margin-left: auto;
 }
+
 .delete-task {
     margin-left: auto;
     background: none;
@@ -76,6 +80,7 @@ body {
     font-weight: bold;
     color: rgb(236, 56, 56);
     transition: transform .3s;
+    outline: none;
 }
 .delete-task:hover {
     transform: scale(1.1);
@@ -89,6 +94,7 @@ body {
     font-weight: bold;
     color: rgb(62, 236, 56);
     transition: transform .3s;
+    outline: none;
 }
 .edit-task:hover {
     transform: scale(1.1);

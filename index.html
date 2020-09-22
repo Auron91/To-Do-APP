@@ -18,27 +18,33 @@
         </div>
         <div class="tasks-section">
             <div class="task" id="task-0">
-                <input type="checkbox" name="" id="0">
-                <label id="label-0" for="0" onclick=toggleTask(0)>Go to the gym</label>
+                <div class="task-content">
+                    <i class="far fa-circle" aria-hidden="true"> </i>
+                    <span>Go to gym!</span>
+                </div>
                 <div class="modify-task">
                     <button class="edit-task" onclick=editTask(${id})>edit</button>
-                    <button class="delete-task" onclick=delteTask(${id})>delete</button>
+                    <button class="delete-task">delete</button>
                 </div>
             </div>
-            <div class="task" id="task-1">
-                <input type="checkbox" name="" id="1" onchange=toggleTask(1)>
-                <label for="1">Go shopping</label>
+            <div class="task task-completed" id="task-1">
+                <div class="task-content">
+                    <i class="far fa-circle" aria-hidden="true"> </i>
+                    <span>Go Shopping</span>
+                </div>
                 <div class="modify-task">
-                    <button class="edit-task" onclick=editTask(${id})>edit</button>
-                    <button class="delete-task" onclick=delteTask(${id})>delete</button>
+                    <button class="edit-task" >edit</button>
+                    <button class="delete-task" >delete</button>
                 </div>
             </div>
             <div class="task" id="task-2">
-                <input type="checkbox" name="" id="2" onchange=toggleTask(2)>
-                <label for="2">Go drink!</label>
+                <div class="task-content">
+                    <i class="far fa-circle" aria-hidden="true"> </i>
+                    <span>Go drink!</span>
+                </div>
                 <div class="modify-task">
                     <button class="edit-task" onclick=editTask(${id})>edit</button>
-                    <button class="delete-task" onclick=delteTask(${id})>delete</button>
+                    <button class="delete-task" >delete</button>
                 </div>
             </div>
         </div>
