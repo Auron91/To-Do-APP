@@ -59,15 +59,13 @@ body {
 .task-content i {
     margin: 5px 5px;
 }
-.task-completed span {
+.task-completed {
     text-decoration: line-through;
 }
 .task:hover {
     transform: scale(1.03);
 }
-.line-through {
-    text-decoration: line-through;
-}
+
 .modify-task {
     margin-left: auto;
 }
