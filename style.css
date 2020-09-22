@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    font-family: "Courier Prime", sans-serif;
+    background-color: rgb(230,230,230);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-body {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    min-height: 400px;
+    width: 600px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px #000;
+    background-color: #FFF;
+
+}
+
+.top {
+    align-self: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.top h1 {
+    font-size: 36px;
+    margin: 20px 40px;
+}
+.tasks-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.task {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    transition: transform .3s;
+}
+
+.task input {
+    margin: 5px 10px;
+    cursor: pointer;
+}
+.task:hover {
+    transform: scale(1.03);
+}
+.line-through {
+    text-decoration: line-through;
+}
+.modify-task {
+    margin-left: auto;
+}
+.delete-task {
+    margin-left: auto;
+    background: none;
+    cursor: pointer;
+    border-style: none;
+    font-weight: bold;
+    color: rgb(236, 56, 56);
+    transition: transform .3s;
+}
+.delete-task:hover {
+    transform: scale(1.1);
+}
+
+.edit-task {
+    margin-left: auto;
+    background: none;
+    cursor: pointer;
+    border-style: none;
+    font-weight: bold;
+    color: rgb(62, 236, 56);
+    transition: transform .3s;
+}
+.edit-task:hover {
+    transform: scale(1.1);
+}
+
+.add-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 10px;
+    margin-top: auto;
+    margin-bottom: 10px;
+    width: 500px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+}
+.add-btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    padding-right: 10px;
+    translate: transform .5s;
+}
+.add-btn:hover {
+    transform: scale(1.1);
+}
+.add-task {
+    display: flex;
+    flex-grow: 1;
+
+}
+.add-task textarea {
+    min-height: 40px;
+    flex-grow: inherit;
+
+}
