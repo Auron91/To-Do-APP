@@ -63,7 +63,6 @@ const createTask = () => {
         <i class="far fa-circle" aria-hidden="true"> </i>
         <span>${textArea.value}</span>
         </div>
-
         <button class="edit-task" onclick=openEditPanel(${taskID})>edit</button>
         <button class="delete-task">delete</button>
         `

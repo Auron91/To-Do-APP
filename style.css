@@ -129,9 +129,22 @@ body {
     outline: none;
     padding-right: 10px;
     translate: transform .5s;
+
 }
 .add-btn:hover {
     transform: scale(1.1);
+}
+
+.add-btn i:hover {
+    animation: spin-animation 0.5s;
+}
+@keyframes spin-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
 }
 .add-task {
     display: flex;
