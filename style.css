@@ -149,17 +149,16 @@ body {
     border-radius: 5px;
     background-color:#FFF;
     opacity: 0;
-    transition: transform .5s, opacity .6s;
+    z-index: -2;
+    transition: transform .5s, opacity .3s;
 }
 .active {
     transform: translateX(211px);
     opacity: 1;
+    z-index: 0;
 }
 .edit-panel h3 {
     margin-top: 20px;
-}
-.edit-panel input {
-
 }
 .save-button, .cancel-button {
     width: 75px;

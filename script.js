@@ -7,13 +7,14 @@ const taskInput = document.querySelector('#task-input');
 
 //edit panel
 const editInput = document.querySelector('.edit-text');
+const editPanel = document.querySelector('.edit-panel');
 
 // Buttons
 const addBtn = document.querySelector('.add-btn');
 const saveBtn = document.querySelector('.save-button');
 const cancelBtn = document.querySelector('.cancel-button');
 
-
+let editTemp = undefined; // holds ID of acctualy edited note
 let taskID = 3;
 
 // sphagetti code for eventListener. Function checks if clicked on edit/delete buttons or on other elements of task DIV. Then toggle style. Great DOM relation playground. Try do span with <i> and textContent for simplicity.
@@ -22,7 +23,7 @@ const toggleTask = (e) => {
         const parentDiv = e.target.parentElement;
         tasks.removeChild(parentDiv);
     } else if (e.target.className == 'edit-task') {
-        editTask(e.target.parentElement.previousElementSibling);
+        null;
     } else if (e.target.className == 'task') {
         const spanNode = e.target.children[0].children[1];
         spanNode.classList.toggle('task-completed');
@@ -77,9 +78,27 @@ const showError = () => {
     alert("Task can't be empty");
 }
 
-const editTask = (id) => {
+const openEditPanel = (id) => {
     const noteToEdit = document.getElementById(id);
+    editInput.value = noteToEdit.children[0].children[1].textContent;
+    editTemp = id;
+    toggleEditPanel();
 }
+
+const editTask = () => {
+    const noteToEdit = document.getElementById(editTemp);
+    if(editInput.value !== ''){
+    noteToEdit.children[0].children[1].textContent = editInput.value;
+    editInput.value = '';
+    toggleEditPanel();
+    } else showError();
+}
+
+const toggleEditPanel = () => {
+    editPanel.classList.toggle('active');
+}
+
+// Event Listeners
 tasks.addEventListener('click', toggleTask);
 addBtn.addEventListener('click', createTask);
 textArea.addEventListener('keydown', e => {
@@ -87,3 +106,12 @@ textArea.addEventListener('keydown', e => {
         createTask();
     }
 });
+editInput.addEventListener('keydown', e => {
+    if(e.key === 'Enter') {
+        editTask();
+    }else if(e.key === 'Escape'){
+        toggleEditPanel();
+    }
+});
+saveBtn.addEventListener('click', editTask);
+cancelBtn.addEventListener('click', toggleEditPanel);
