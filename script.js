@@ -51,7 +51,9 @@ const toggleIcon = (siblingNode) => {
     }
 }
 const createTask = () => {
-    if (textArea.value !== '') {
+    if (textArea.value == '') {
+        showError();
+    } else {
         const newTask = document.createElement('div');
         newTask.classList.add('task');
         newTask.setAttribute('id', taskID);
@@ -62,15 +64,13 @@ const createTask = () => {
         <span>${textArea.value}</span>
         </div>
 
-        <button class="edit-task" onclick=editTask(${taskID})>edit</button>
+        <button class="edit-task" onclick=openEditPanel(${taskID})>edit</button>
         <button class="delete-task">delete</button>
         `
 
         taskID++;
         taskSection.appendChild(newTask);
         taskInput.value = '';
-    } else {
-        showError();
     }
 }
 
@@ -91,11 +91,13 @@ const editTask = () => {
     noteToEdit.children[0].children[1].textContent = editInput.value;
     editInput.value = '';
     toggleEditPanel();
+
     } else showError();
 }
 
 const toggleEditPanel = () => {
     editPanel.classList.toggle('active');
+    editInput.focus();
 }
 
 // Event Listeners
