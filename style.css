@@ -86,7 +86,7 @@ body {
     border-style: none;
     font-weight: bold;
     color: rgb(236, 56, 56);
-    transition: transform .3s;
+    transition: transform .3s, opacity .5s;
     outline: none;
     opacity: .2;
 }
@@ -104,7 +104,7 @@ body {
     transition: transform .3s;
     outline: none;
     opacity: .2;
-    transition: opacity .8s;
+    transition: opacity .5s;
 }
 .edit-task:hover {
     transform: scale(1.1);
