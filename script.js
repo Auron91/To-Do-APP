@@ -1,19 +1,28 @@
 const tasks = document.querySelector('.tasks-section');
-const addBtn = document.querySelector('.add-btn');
-const taskInput = document.querySelector('#task-input');
-const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
-const taskSection = document.querySelector('.tasks-section');
+
+// tasks area
 const textArea = document.querySelector('#task-input');
+const taskSection = document.querySelector('.tasks-section');
+const taskInput = document.querySelector('#task-input');
+
+//edit panel
+const editInput = document.querySelector('.edit-text');
+
+// Buttons
+const addBtn = document.querySelector('.add-btn');
+const saveBtn = document.querySelector('.save-button');
+const cancelBtn = document.querySelector('.cancel-button');
+
 
 let taskID = 3;
 
-// sphagetti code for eventListener. Function checks if clicked on edit/delete buttons or on other elements of task DIV. Then toggle style. Great DOM relation playground.
+// sphagetti code for eventListener. Function checks if clicked on edit/delete buttons or on other elements of task DIV. Then toggle style. Great DOM relation playground. Try do span with <i> and textContent for simplicity.
 const toggleTask = (e) => {
     if (e.target.className == 'delete-task') {
-        const parentDiv = e.target.parentElement.parentElement;
+        const parentDiv = e.target.parentElement;
         tasks.removeChild(parentDiv);
     } else if (e.target.className == 'edit-task') {
-        console.log('edit task');
+        editTask(e.target.parentElement.previousElementSibling);
     } else if (e.target.className == 'task') {
         const spanNode = e.target.children[0].children[1];
         spanNode.classList.toggle('task-completed');
@@ -30,7 +39,7 @@ const toggleTask = (e) => {
 }
 const toggleIcon = (siblingNode) => {
     const iconNode = siblingNode.previousElementSibling;
-    if(iconNode.classList == 'far fa-circle'){
+    if (iconNode.classList == 'far fa-circle') {
         iconNode.classList.remove('fa-circle');
         iconNode.classList.add('fa-check-circle');
         //console.log('icon set to check');
@@ -41,25 +50,40 @@ const toggleIcon = (siblingNode) => {
     }
 }
 const createTask = () => {
-    const newTask = document.createElement('div');
-    newTask.classList.add('task');
-    newTask.setAttribute('id', taskID);
+    if (textArea.value !== '') {
+        const newTask = document.createElement('div');
+        newTask.classList.add('task');
+        newTask.setAttribute('id', taskID);
 
-    newTask.innerHTML = `
-    <div class="task-content">
-    <i class="far fa-circle" aria-hidden="true"> </i>
-    <span>${textArea.value}</span>
-    </div>
-    
-    <div class="modify-task">
-        <button class="edit-task">edit</button>
+        newTask.innerHTML = `
+        <div class="task-content">
+        <i class="far fa-circle" aria-hidden="true"> </i>
+        <span>${textArea.value}</span>
+        </div>
+
+        <button class="edit-task" onclick=editTask(${taskID})>edit</button>
         <button class="delete-task">delete</button>
-    </div>
-    `
+        `
 
-    taskID++;
-    taskSection.appendChild(newTask);
+        taskID++;
+        taskSection.appendChild(newTask);
+        taskInput.value = '';
+    } else {
+        showError();
+    }
 }
 
+const showError = () => {
+    alert("Task can't be empty");
+}
+
+const editTask = (id) => {
+    const noteToEdit = document.getElementById(id);
+}
 tasks.addEventListener('click', toggleTask);
 addBtn.addEventListener('click', createTask);
+textArea.addEventListener('keydown', e => {
+    if(e.key === 'Enter') {
+        createTask();
+    }
+});

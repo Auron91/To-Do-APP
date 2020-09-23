@@ -12,50 +12,55 @@
 </head>
 
 <body>
-    <div class="app-body">
-        <div class="top">
-            <h1><i class="fas fa-calendar-alt"></i> Planer</h1>
+    <div class="planner-app">
+        <div class="edit-panel active">
+            <h3>Edit task:</h3>
+            <input class="edit-text" type="text">
+            <div class="edit-buttons">
+                <button class="save-button">Save</button>
+                <button class="cancel-button">Cancel</button>
+            </div>
         </div>
-        <div class="tasks-section">
-            <div class="task" id="task-0">
-                <div class="task-content">
-                    <i class="far fa-circle" aria-hidden="true"> </i>
-                    <span>Go to gym!</span>
+        <div class="app-body">
+            <div class="top">
+                <h1><i class="fas fa-calendar-alt"></i> Planer</h1>
+            </div>
+            <div class="tasks-section">
+                <div class="task" id="0">
+                    <span class="task-content">
+                        <i class="far fa-circle" aria-hidden="true"> </i>
+                        <span>Go to gym!</span>
+                    </span>
+                    <button class="edit-task">edit</button>
+                    <button class="delete-task">delete</button>
                 </div>
-                <div class="modify-task">
-                    <button class="edit-task" >edit</button>
+                <div class="task" id="1">
+                    <div class="task-content">
+                        <i class="far fa-circle" aria-hidden="true"> </i>
+                        <span>Go Shopping</span>
+                    </div>
+                    <button class="edit-task">edit</button>
+                    <button class="delete-task">delete</button>
+                </div>
+                <div class="task" id="2">
+                    <div class="task-content">
+                        <i class="far fa-circle" aria-hidden="true"> </i>
+                        <span>Go drink!</span>
+                    </div>
+                    <button class="edit-task">edit</button>
                     <button class="delete-task">delete</button>
                 </div>
             </div>
-            <div class="task" id="task-1">
-                <div class="task-content">
-                    <i class="far fa-circle" aria-hidden="true"> </i>
-                    <span>Go Shopping</span>
+            <div class="add-section">
+                <button class="add-btn"><i class="fas fa-plus fa-2x"></i></button>
+                <div class="add-task">
+                    <label for="task-input"></label>
+                    <input type="text" name="" id="task-input"></input>
                 </div>
-                <div class="modify-task">
-                    <button class="edit-task" >edit</button>
-                    <button class="delete-task" >delete</button>
-                </div>
-            </div>
-            <div class="task" id="task-2">
-                <div class="task-content">
-                    <i class="far fa-circle" aria-hidden="true"> </i>
-                    <span>Go drink!</span>
-                </div>
-                <div class="modify-task">
-                    <button class="edit-task" >edit</button>
-                    <button class="delete-task" >delete</button>
-                </div>
-            </div>
-        </div>
-        <div class="add-section">
-            <button class="add-btn"><i class="fas fa-plus fa-2x"></i></button>
-            <div class="add-task">
-                <label for="task-input"></label>
-                <textarea type="text" name="" id="task-input"></textarea>
             </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 

@@ -5,14 +5,17 @@
 }
 
 body {
-    height: 100vh;
-    font-family: "Courier Prime", sans-serif;
-    background-color: rgb(230,230,230);
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    font-family: "Courier Prime", sans-serif;
+    background-color: rgb(230,230,230);
+    user-select: none;
 }
-
+.planner-app {
+    position: relative;
+}
 .app-body {
     display: flex;
     justify-content: flex-start;
@@ -47,6 +50,7 @@ body {
     width: 500px;
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
     border: 1px solid black;
     border-radius: 5px;
@@ -66,12 +70,11 @@ body {
     transform: scale(1.03);
 }
 
-.modify-task {
-    margin-left: auto;
+.edit-task {
+    padding-right: 15px;
 }
 
 .delete-task {
-    margin-left: auto;
     background: none;
     cursor: pointer;
     border-style: none;
@@ -104,7 +107,7 @@ body {
     justify-content: flex-start;
     padding: 10px;
     margin-top: auto;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     width: 500px;
     border: 1px solid black;
     border-radius: 5px;
@@ -126,8 +129,40 @@ body {
     flex-grow: 1;
 
 }
-.add-task textarea {
-    min-height: 40px;
+.add-task input {
     flex-grow: inherit;
+    font-size: 20px;
+    padding: 5px;
+}
 
+.edit-panel {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 50px;
+    right: 5px;
+    border: solid 1px black;
+    border-radius: 5px;
+    background-color:#FFF;
+    opacity: 0;
+    transition: transform .5s, opacity .6s;
+}
+.active {
+    transform: translateX(211px);
+    opacity: 1;
+}
+.edit-panel h3 {
+    margin-top: 20px;
+}
+.edit-panel input {
+
+}
+.save-button, .cancel-button {
+    width: 75px;
+    padding: 5px 15px;
+    border-radius: 3px;
 }
