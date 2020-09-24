@@ -94,6 +94,18 @@ body {
     transform: scale(1.1);
 }
 
+.delete-animation {
+    animation: fade-away .8s;
+}
+@keyframes fade-away {
+    0% {
+        transform: translateY(0px);
+        opacity: 1;
+    } 100% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+}
 .edit-task {
     margin-left: auto;
     background: none;

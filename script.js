@@ -20,10 +20,10 @@ let taskID = 3;
 // sphagetti code for eventListener. Function checks if clicked on edit/delete buttons or on other elements of task DIV. Then toggle style. Great DOM relation playground. Try do span with <i> and textContent for simplicity.
 const toggleTask = (e) => {
     if (e.target.className == 'delete-task') {
-        const parentDiv = e.target.parentElement;
-        tasks.removeChild(parentDiv);
-    } else if (e.target.className == 'edit-task') {
-        null;
+        const taskDiv = e.target.parentElement;
+        taskDiv.classList.add('delete-animation');
+        setTimeout(() =>{
+            tasks.removeChild(taskDiv)}, 700);
     } else if (e.target.className == 'task') {
         const spanNode = e.target.children[0].children[1];
         spanNode.classList.toggle('task-completed');
