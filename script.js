@@ -16,14 +16,14 @@ const cancelBtn = document.querySelector('.cancel-button');
 
 let editTemp = undefined; // holds ID of acctualy edited note
 let taskID = 3;
-
+let editPanelState = false;
 // sphagetti code for eventListener. Function checks if clicked on edit/delete buttons or on other elements of task DIV. Then toggle style. Great DOM relation playground. Try do span with <i> and textContent for simplicity.
 const toggleTask = (e) => {
     if (e.target.className == 'delete-task') {
         const taskDiv = e.target.parentElement;
         taskDiv.classList.add('delete-animation');
-        setTimeout(() =>{
-            tasks.removeChild(taskDiv)}, 700);
+        setTimeout(() =>{tasks.removeChild(taskDiv)}, 700);
+        if(editPanelState) toggleEditPanel();
     } else if (e.target.className == 'task') {
         const spanNode = e.target.children[0].children[1];
         spanNode.classList.toggle('task-completed');
@@ -97,6 +97,8 @@ const editTask = () => {
 const toggleEditPanel = () => {
     editPanel.classList.toggle('active');
     editInput.focus();
+    editPanelState = editPanelState? false : true;
+
 }
 
 // Event Listeners
