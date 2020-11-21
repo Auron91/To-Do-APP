@@ -57,14 +57,15 @@ const toggleIcon = (siblingNode) => {
     }
 }
 const createTask = async () => {
+    console.log(token)
     if (textArea.value == '') {
         showError();
     } else {
         await fetch('/tasks', {
             method: 'POST',
             headers: {
-                'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmIyZWQyOWU2NDZjMTA1ODg0M2Q4YzAiLCJpYXQiOjE2MDU1NjE2NDF9.VOWtyGnzmkpQHxWeHSRYEvdXTUzWcnUlpPlJbT2boSQ",
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': "application/json"
             },
             body: JSON.stringify({
                 "description": textArea.value

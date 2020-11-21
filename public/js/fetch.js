@@ -15,7 +15,6 @@ function getCookie(cname) {
     return "";
 }
 let token = getCookie("userToken")
-console.log(token)
 const getTask = async (_id, callback) => {
     try {
         const task = await fetch(`/tasks/${_id}`, {
