@@ -1,3 +1,22 @@
+console.log(document.cookie)
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+let token = getCookie("userToken")
+console.log(token)
 const getTask = async (_id, callback) => {
     try {
         const task = await fetch(`/tasks/${_id}`, {
@@ -26,24 +45,24 @@ const getTasks = async (callback) => {
 }
 
 const renderTaskFromDB = (task) => {
-        const newTask = document.createElement('div');
-        newTask.classList.add('task');
-        newTask.setAttribute('id', task._id);
+    const newTask = document.createElement('div');
+    newTask.classList.add('task');
+    newTask.setAttribute('id', task._id);
 
-        newTask.innerHTML = `
+    newTask.innerHTML = `
         <div class="task-content">
         <i class="far fa-circle" aria-hidden="true"> </i>
         <span>${task.description}</span>
         </div>
-        <button class="edit-task" onclick=openEditPanel(${task._id})>edit</button>
+        <button class="edit-task" onclick=openEditPanel("${task._id}")>edit</button>
         <button class="delete-task">delete</button>
         `
-        taskSection.appendChild(newTask);
-        if(task.completed) {
-            newTask.children[0].children[1].classList.toggle('task-completed');
-            toggleIcon(newTask.children[0].children[1]);
-        }
-        taskInput.value = '';
+    taskSection.appendChild(newTask);
+    if (task.completed) {
+        newTask.children[0].children[1].classList.toggle('task-completed');
+        toggleIcon(newTask.children[0].children[1]);
+    }
+    taskInput.value = '';
 
 }
 const toggleTaskDB = async (_id) => {
@@ -57,14 +76,31 @@ const toggleTaskDB = async (_id) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "completed":  task.completed? false : true
+                    "completed": task.completed ? false : true
                 })
             })
         } catch (e) {
-            throw new Error (e)
+            throw new Error(e)
         }
     })
 
+}
+
+const editTaskDB = async (_id, description) => {
+    try {
+        await fetch(`/tasks/${_id}`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmIyZWQyOWU2NDZjMTA1ODg0M2Q4YzAiLCJpYXQiOjE2MDU1NjE2NDF9.VOWtyGnzmkpQHxWeHSRYEvdXTUzWcnUlpPlJbT2boSQ",
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "description": description
+            })
+        })
+    } catch (e) {
+        throw new Error(e)
+    }
 }
 
 const deleteTask = async (_id) => {

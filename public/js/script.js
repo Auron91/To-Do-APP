@@ -51,11 +51,9 @@ const toggleIcon = (siblingNode) => {
     if (iconNode.classList == 'far fa-circle') {
         iconNode.classList.remove('fa-circle');
         iconNode.classList.add('fa-check-circle');
-        //console.log('icon set to check');
     } else {
         iconNode.classList.remove('fa-check-circle');
         iconNode.classList.add('fa-circle');
-        //console.log('icon set to circle');
     }
 }
 const createTask = async () => {
@@ -73,22 +71,6 @@ const createTask = async () => {
             })
         })
         window.location.reload()
-        // const newTask = document.createElement('div');
-        // newTask.classList.add('task');
-        // newTask.setAttribute('id', taskID);
-
-        // newTask.innerHTML = `
-        // <div class="task-content">
-        // <i class="far fa-circle" aria-hidden="true"> </i>
-        // <span>${textArea.value}</span>
-        // </div>
-        // <button class="edit-task" onclick=openEditPanel(${taskID})>edit</button>
-        // <button class="delete-task">delete</button>
-        // `
-
-        // taskID++;
-        // taskSection.appendChild(newTask);
-        // taskInput.value = '';
     }
 }
 
@@ -100,6 +82,7 @@ const openEditPanel = (id) => {
     const noteToEdit = document.getElementById(id);
     editInput.value = noteToEdit.children[0].children[1].textContent;
     editTemp = id;
+    console.log(editTemp)
     toggleEditPanel();
 }
 
@@ -107,6 +90,7 @@ const editTask = () => {
     const noteToEdit = document.getElementById(editTemp);
     if(editInput.value !== ''){
     noteToEdit.children[0].children[1].textContent = editInput.value;
+    editTaskDB(editTemp, editInput.value)
     editInput.value = '';
     toggleEditPanel();
     } else showError();
