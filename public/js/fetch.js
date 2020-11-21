@@ -1,4 +1,3 @@
-console.log(document.cookie)
 
 function getCookie(cname) {
     var name = cname + "=";
@@ -21,7 +20,7 @@ const getTask = async (_id, callback) => {
     try {
         const task = await fetch(`/tasks/${_id}`, {
             headers: {
-                'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmIyZWQyOWU2NDZjMTA1ODg0M2Q4YzAiLCJpYXQiOjE2MDU1NjE2NDF9.VOWtyGnzmkpQHxWeHSRYEvdXTUzWcnUlpPlJbT2boSQ"
+                'Authorization': `Bearer ${token}`
             }
         })
         let data = await task.json();
@@ -34,7 +33,7 @@ const getTasks = async (callback) => {
     try {
         const tasksResponse = await fetch('/tasks', {
             headers: {
-                'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmIyZWQyOWU2NDZjMTA1ODg0M2Q4YzAiLCJpYXQiOjE2MDU1NjE2NDF9.VOWtyGnzmkpQHxWeHSRYEvdXTUzWcnUlpPlJbT2boSQ"
+                'Authorization': `Bearer ${token}`
             }
         })
         let data = await tasksResponse.json();
@@ -72,7 +71,7 @@ const toggleTaskDB = async (_id) => {
             await fetch(`/tasks/${_id}`, {
                 method: 'PATCH',
                 headers: {
-                    'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmIyZWQyOWU2NDZjMTA1ODg0M2Q4YzAiLCJpYXQiOjE2MDU1NjE2NDF9.VOWtyGnzmkpQHxWeHSRYEvdXTUzWcnUlpPlJbT2boSQ",
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
@@ -91,7 +90,7 @@ const editTaskDB = async (_id, description) => {
         await fetch(`/tasks/${_id}`, {
             method: 'PATCH',
             headers: {
-                'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmIyZWQyOWU2NDZjMTA1ODg0M2Q4YzAiLCJpYXQiOjE2MDU1NjE2NDF9.VOWtyGnzmkpQHxWeHSRYEvdXTUzWcnUlpPlJbT2boSQ",
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -108,7 +107,7 @@ const deleteTask = async (_id) => {
         await fetch(`/tasks/${_id}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmIyZWQyOWU2NDZjMTA1ODg0M2Q4YzAiLCJpYXQiOjE2MDU1NjE2NDF9.VOWtyGnzmkpQHxWeHSRYEvdXTUzWcnUlpPlJbT2boSQ",
+                'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         })
