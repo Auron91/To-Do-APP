@@ -1,3 +1,4 @@
+
 const tasks = document.querySelector('.tasks-section');
 
 // tasks area
@@ -15,27 +16,34 @@ const saveBtn = document.querySelector('.save-button');
 const cancelBtn = document.querySelector('.cancel-button');
 
 let editTemp = undefined; // holds ID of acctualy edited note
-let taskID = 3;
+//let taskID = 3;
 let editPanelState = false;
+
 // sphagetti code for eventListener. Function checks if clicked on edit/delete buttons or on other elements of task DIV. Then toggle style. Great DOM relation playground. Try do span with <i> and textContent for simplicity.
 const toggleTask = (e) => {
     if (e.target.className == 'delete-task') {
         const taskDiv = e.target.parentElement;
         taskDiv.classList.add('delete-animation');
-        setTimeout(() =>{tasks.removeChild(taskDiv)}, 700);
+        deleteTask(taskDiv.id)
+        setTimeout(() =>{
+            tasks.removeChild(taskDiv)
+        }, 700);
         if(editPanelState) toggleEditPanel();
     } else if (e.target.className == 'task') {
         const spanNode = e.target.children[0].children[1];
         spanNode.classList.toggle('task-completed');
         toggleIcon(spanNode);
+        toggleTaskDB(e.target.id)
     } else if (e.target.nodeName === 'SPAN') {
         const spanNode = e.target;
         spanNode.classList.toggle('task-completed');
         toggleIcon(spanNode);
+        toggleTaskDB(e.target.parentElement.parentElement.id)
     } else if (e.target.nodeName === 'I') {
         const spanNode = e.target.parentElement.children[1];
         spanNode.classList.toggle('task-completed');
         toggleIcon(spanNode);
+        toggleTaskDB(e.target.parentElement.parentElement.id)
     }
 }
 const toggleIcon = (siblingNode) => {
@@ -50,26 +58,37 @@ const toggleIcon = (siblingNode) => {
         //console.log('icon set to circle');
     }
 }
-const createTask = () => {
+const createTask = async () => {
     if (textArea.value == '') {
         showError();
     } else {
-        const newTask = document.createElement('div');
-        newTask.classList.add('task');
-        newTask.setAttribute('id', taskID);
+        await fetch('/tasks', {
+            method: 'POST',
+            headers: {
+                'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmIyZWQyOWU2NDZjMTA1ODg0M2Q4YzAiLCJpYXQiOjE2MDU1NjE2NDF9.VOWtyGnzmkpQHxWeHSRYEvdXTUzWcnUlpPlJbT2boSQ",
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "description": textArea.value
+            })
+        })
+        window.location.reload()
+        // const newTask = document.createElement('div');
+        // newTask.classList.add('task');
+        // newTask.setAttribute('id', taskID);
 
-        newTask.innerHTML = `
-        <div class="task-content">
-        <i class="far fa-circle" aria-hidden="true"> </i>
-        <span>${textArea.value}</span>
-        </div>
-        <button class="edit-task" onclick=openEditPanel(${taskID})>edit</button>
-        <button class="delete-task">delete</button>
-        `
+        // newTask.innerHTML = `
+        // <div class="task-content">
+        // <i class="far fa-circle" aria-hidden="true"> </i>
+        // <span>${textArea.value}</span>
+        // </div>
+        // <button class="edit-task" onclick=openEditPanel(${taskID})>edit</button>
+        // <button class="delete-task">delete</button>
+        // `
 
-        taskID++;
-        taskSection.appendChild(newTask);
-        taskInput.value = '';
+        // taskID++;
+        // taskSection.appendChild(newTask);
+        // taskInput.value = '';
     }
 }
 
@@ -90,7 +109,6 @@ const editTask = () => {
     noteToEdit.children[0].children[1].textContent = editInput.value;
     editInput.value = '';
     toggleEditPanel();
-
     } else showError();
 }
 
@@ -98,7 +116,6 @@ const toggleEditPanel = () => {
     editPanel.classList.toggle('active');
     editInput.focus();
     editPanelState = editPanelState? false : true;
-
 }
 
 // Event Listeners
