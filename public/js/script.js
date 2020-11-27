@@ -14,6 +14,7 @@ const editPanel = document.querySelector('.edit-panel');
 const addBtn = document.querySelector('.add-btn');
 const saveBtn = document.querySelector('.save-button');
 const cancelBtn = document.querySelector('.cancel-button');
+const logoutBtn = document.querySelector('#logout')
 
 let editTemp = undefined; // holds ID of acctualy edited note
 //let taskID = 3;
@@ -103,6 +104,20 @@ const toggleEditPanel = () => {
     editPanelState = editPanelState? false : true;
 }
 
+// logout
+// const logout = async () => {
+//     try {
+//         await fetch('/users/logoutAll', {
+//             method: 'POST',
+//             headers: {
+//                 'Authorization': `Bearer ${token}`,
+//                 'Content-Type': 'application/json'
+//             }
+//         })
+//     } catch (e) {
+//         throw new Error (e)
+//     }
+// }
 // Event Listeners
 tasks.addEventListener('click', toggleTask);
 addBtn.addEventListener('click', createTask);

@@ -12,17 +12,20 @@
 </head>
 
 <body>
+    {{> header}}
     <div class="centered-form">
-        <h1>Log in!</h1>
-        <form id="login-form">
-            <label for="">e-mail</label>
-            <input type="text" placeholder="Your e-mail" name="email" autocomplete="on" required>
-            <label for="">Password</label>
-            <input type="password" name="password" placeholder="password" required>
-            <button type="submit" for="login-form">Login</button>
+        <form>
+            <h2>log in</h2>
+            <label for="email">Email</label>
+            <input type="text" name="email" required>
+            <div class="email error"></div>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="">
+            <div class="password error"></div>
+            <button>log in</button>
         </form>
+    <div class="footer">{{> footer}}</div>
 
-        <a href="/register">Sign up</a>
     </div>
     <script src="./js/login.js"></script>
 
