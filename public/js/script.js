@@ -58,7 +58,6 @@ const toggleIcon = (siblingNode) => {
     }
 }
 const createTask = async () => {
-    console.log(token)
     if (textArea.value == '') {
         showError();
     } else {
@@ -84,7 +83,6 @@ const openEditPanel = (id) => {
     const noteToEdit = document.getElementById(id);
     editInput.value = noteToEdit.children[0].children[1].textContent;
     editTemp = id;
-    console.log(editTemp)
     toggleEditPanel();
 }
 

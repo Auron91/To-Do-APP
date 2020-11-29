@@ -7,7 +7,7 @@
     <title>To do APP!</title>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 
-   <link rel="stylesheet" href="./css/style.css"
+    <link rel="stylesheet" href="./css/style.css">
     <script src="https://kit.fontawesome.com/e16e550c52.js" crossorigin="anonymous"></script>
 </head>
 
@@ -19,19 +19,20 @@
                 <h2>Edit user data</h2>
                 <label for="name">Name</label>
                 <input type="text" name="name" value={{user.name}} required>
+                <div class="name error"></div>
                 <label for="email">Email</label>
                 <input type="text" name="email" value={{user.email}} required>
                 <div class="email error"></div>
-                <label for="password">Password</label>
-                <input type="password" name="password" id="">
-                <div class="password error"></div>
+                <div class="change-password">
+                    <h3><a href="/password">Change password</a></h3>
+                </div>
                 <button>Save</button>
+                <div class="updated error"></div>
             </form>
         </div>
         <div class="footer">{{> footer}}</div>
     </div>
-    <script src="./js/signup.js"></script>
-
+    <script src="./js/userProfile.js"></script>
 </body>
 
 </html>

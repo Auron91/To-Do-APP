@@ -29,8 +29,10 @@ hbs.registerPartials(partialsPath)
 
 // index page route
 
+// doing stuff if user loged in
 app.get('*', checkUser)
 
+// if loged redirect to tasks
 app.get('/', (req, res) => {
     if(req.cookies.jwt) {
         res.redirect('/main')
@@ -55,6 +57,9 @@ app.get('/logout', (req, res) => {
 app.get('/userprofile', (req, res) => {
     res.render('userProfile')
 })
+app.get('/password', (req, res) => {
+    res.render('userPassword')
+})
 
 app.get('/main', (req, res) => {
     if (!req.cookies.jwt) {
@@ -64,4 +69,3 @@ app.get('/main', (req, res) => {
     }
 })
 module.exports = app
-
