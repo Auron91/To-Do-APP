@@ -1,8 +1,13 @@
 <nav>
+    <h1><a href="/">Planner APP</a></h1>
     <ul>
-        <li><a  href="/logout" id="logout">Log out</a></li>
-        <li><a href="/login">Log in</a></li>
-        <li><a href="/signup" class="btn">Sign up</a></li>
+        {{#if user}}
+        <li><a  href="/logout" id="logout">Log out <i class="fas fa-sign-out-alt"></i></a></li>
+        <li><a  href="/userprofile" id="user-profile">User profile <i class="fas fa-user-edit"></i></i></a></li>
+        {{else}}
+        <li><a href="/login">Log in <i class="fas fa-user"></i></a></li>
+        <li><a href="/signup" class="btn">Sign up <i class="fas fa-user-plus"></i></a></li>
+        {{/if}}
     </ul>
 </nav>
 

@@ -1,0 +1,246 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+body{
+  margin: 20px 40px;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  background: #fafafa;
+}
+.planner-app {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.container {
+    position: relative;
+    align-self: center;
+}
+.app-body {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    min-height: 400px;
+    width: 600px;
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px #000;
+    background-color: #FFF;
+}
+
+h1, h2, h3, h4, ul, li, a, p, input, label, button, div, footer{
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  color: #444;
+}
+ul{
+  list-style-type: none;
+}
+a{
+  text-decoration: none;
+}
+nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 60px;
+}
+nav ul{
+  display: flex;
+  align-items: center;
+}
+nav li{
+  margin-left: 20px;
+}
+nav li a{
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.8em;
+  display: block;
+  padding: 10px 16px;
+  letter-spacing: 2px;
+}
+.btn{
+  border-radius: 36px;
+  background: #FEE996;
+
+}
+.top {
+    align-self: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.top h1 {
+    font-size: 36px;
+    margin: 20px 40px;
+}
+.tasks-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.task {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    transition: transform .3s;
+    cursor: pointer;
+}
+
+.task-content i {
+    margin: 5px 5px;
+}
+.task-completed {
+    text-decoration: line-through;
+}
+.task:hover {
+    transform: scale(1.03);
+}
+
+.task:hover>.edit-task {
+    opacity: 1;
+}
+.task:hover>.delete-task {
+    opacity: 1;
+}
+.edit-task {
+    padding-right: 15px;
+}
+
+.delete-task {
+    background: none;
+    cursor: pointer;
+    border-style: none;
+    font-weight: bold;
+    color: rgb(236, 56, 56);
+    transition: transform .3s, opacity .5s;
+    outline: none;
+    opacity: .2;
+}
+.delete-task:hover {
+    transform: scale(1.1);
+}
+
+.delete-animation {
+    animation: fade-away .8s;
+}
+@keyframes fade-away {
+    0% {
+        transform: translateY(0px);
+        opacity: 1;
+    } 100% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+}
+.edit-task {
+    margin-left: auto;
+    background: none;
+    cursor: pointer;
+    border-style: none;
+    font-weight: bold;
+    color: rgb(62, 236, 56);
+    transition: transform .3s;
+    outline: none;
+    opacity: .2;
+    transition: opacity .5s;
+}
+.edit-task:hover {
+    transform: scale(1.1);
+}
+
+.add-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 10px;
+    margin-top: auto;
+    margin-bottom: 20px;
+    width: 500px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+}
+.add-btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    padding-right: 10px;
+    translate: transform .5s;
+
+}
+.add-btn:hover {
+    transform: scale(1.1);
+}
+
+.add-btn i:hover {
+    animation: spin-animation 0.5s;
+}
+@keyframes spin-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
+}
+.add-task {
+    display: flex;
+    flex-grow: 1;
+
+}
+.add-task input {
+    flex-grow: inherit;
+    font-size: 20px;
+    padding: 5px;
+}
+
+.edit-panel {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    top: 150px;
+    right: 5px;
+    border: solid 1px black;
+    border-radius: 5px;
+    background-color:#FFF;
+    opacity: 0;
+    z-index: -1;
+    transition: transform .5s, opacity 0.5s, z-index 1s ease-in;
+}
+.active {
+    transform: translateX(215px);
+    opacity: 1;
+    z-index: 0;
+}
+.edit-panel h3 {
+    margin-top: 20px;
+}
+.save-button, .cancel-button {
+    width: 75px;
+    padding: 5px 15px;
+    border-radius: 3px;
+}
+
+.footer{
+    align-self: flex-end;
+    text-align: center;
+    margin-top: 60px;
+    color: #aaa;
+  }

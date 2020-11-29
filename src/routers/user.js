@@ -3,12 +3,45 @@ const multer = require('multer')
 const sharp = require('sharp')
 
 const User = require('../models/user')
-const auth = require('../middleware/auth')
+const { auth }  = require('../middleware/auth')
 const { sendWelcomeEmail, sendCancelationEmail } = require('../emails/account')
 const router = new express.Router()
 
-// 3 days in seconds
-const maxAge = 3 * 24 * 60 * 60
+// 1 day in seconds
+const maxAge = 24 * 60 * 60
+
+//handle errors
+const handleErrors = (err) => {
+    console.log( err.message, err.code )
+    let errors = { name: '', email: '', password: '' }
+
+    if(err.message === 'incorrect email') {
+        errors.email = 'That email is not registered'
+    }
+
+    if(err.message === 'incorrect password') {
+        errors.password = 'Incorrect password'
+    }
+    if(err.message === 'Please enter name') {
+        errors.name = 'Please enter name'
+    }
+    if(err.message === 'Unable to login') {
+        errors.email = 'Bad login or password'
+    }
+    // duplicate errors code
+    if (err.code === 11000) {
+        errors.email = 'That email is already registered'
+        return errors
+    }
+
+    // validation errorrs
+    if(err.message.includes('User validation failed')){
+        Object.values(err.errors).forEach(({ properties }) => {
+            errors[properties.path] = properties.message
+        })
+    }
+    return errors
+}
 
 // sign up route
 router.post('/users', async (req, res) => {
@@ -19,8 +52,10 @@ router.post('/users', async (req, res) => {
         const token = await user.generateAuthToken()
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
         res.status(201).send({ user})
-    } catch (e) {
-        res.status(400).send(e)
+    } catch (err) {
+        const errors = handleErrors(err)
+        console.log(errors)
+        res.status(400).json({ errors })
     }
 })
 // login route
@@ -29,9 +64,10 @@ router.post('/users/login', async (req, res) => {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
         res.cookie('jwt', token,  { httpOnly: true, maxAge: maxAge * 1000 } )
-        res.status(200).send({ user, token })
-    } catch (e) {
-        res.status(400).send()
+        res.status(200).send({ user })
+    } catch (err) {
+        const errors = handleErrors(err)
+        res.status(400).json({ errors })
     }
 })
 
@@ -97,13 +133,7 @@ router.patch('/users/me', auth, async (req, res) => {
 
 // delete profile
 router.delete('/users/me', auth, async (req, res) => {
-    //const _id = req.user._id
     try {
-        // const user = await User.findByIdAndRemove(_id)
-        // if(!user) {
-        //     return res.status(404).send()
-        // }
-        // res.send(user)
         await req.user.remove()
         sendCancelationEmail(req.user.email, req.user.name)
         res.send(req.user)
@@ -111,59 +141,5 @@ router.delete('/users/me', auth, async (req, res) => {
         res.status(500).send(e)
     }
 })
-
-//multer settings
-const upload = multer({
-    //dest: './images/avatars',
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-            return cb(new Error('File must be a picture'), undefined)
-        }
-        cb(undefined, true)
-    }
-
-})
-
-router.post('/users/me/avatar', auth, upload.single('avatar'), async (req, res) => {
-    //req.user.avatar = req.file.buffer
-    const buffer = await sharp(req.file.buffer)
-    .png()
-    .resize({
-        width: 250,
-        height: 250
-    })
-    .toBuffer()
-
-    req.user.avatar = buffer
-    await req.user.save()
-    res.status(200).send()
-}, (error, req, res, next) => {
-    res.status(400).send({ error: error.message })
-})
-
-router.delete('/users/me/avatar', auth, async (req, res) => {
-    req.user.avatar = undefined
-    await req.user.save()
-    res.send()
-})
-
-router.get('/users/:id/avatar', async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id)
-
-        if(!user || !user.avatar) {
-            throw new Errror({error: "No user or pic"})
-        }
-        res.set('Content-Type', 'image/jpg').send(user.avatar)
-
-    } catch(e) {
-        res.status(404).send()
-    }
-})
-
-// view routes
 
 module.exports = router

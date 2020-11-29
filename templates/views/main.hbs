@@ -8,41 +8,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/appStyle.css">
     <script src="https://kit.fontawesome.com/e16e550c52.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     {{> header }}
     <div class="planner-app">
-
-        <div class="app-body">
-            <div class="top">
-                <h1><i class="fas fa-calendar-alt"></i> Planer</h1>
+        <div class="container">
+            <div class="edit-panel">
+                <h3>Edit task:</h3>
+                <input class="edit-text" type="text">
+                <div class="edit-buttons">
+                    <button class="save-button">Save</button>
+                    <button class="cancel-button">Cancel</button>
+                </div>
             </div>
-            <div class="tasks-section">
-
-            </div>
-            <div class="add-section">
-                <button class="add-btn"><i class="fas fa-plus fa-2x"></i></button>
-                <div class="add-task">
-                    <label for="task-input"></label>
-                    <input type="text" name="" id="task-input"></input>
+            <div class="app-body">
+                <div class="top">
+                    <h1><i class="fas fa-calendar-alt"></i> Planer</h1>
+                </div>
+                <div class="tasks-section">
+                </div>
+                <div class="add-section">
+                    <button class="add-btn"><i class="fas fa-plus fa-2x"></i></button>
+                    <div class="add-task">
+                        <label for="task-input"></label>
+                        <input type="text" name="" id="task-input"></input>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="edit-panel">
-            <h3>Edit task:</h3>
-            <input class="edit-text" type="text">
-            <div class="edit-buttons">
-                <button class="save-button">Save</button>
-                <button class="cancel-button">Cancel</button>
-            </div>
-        </div>
+        <div class="footer">{{> footer}}</div>
     </div>
-    {{> footer}}
+
     <script src="./js/script.js"></script>
     <script src="./js/fetch.js"></script>
-    </script>
 </body>
 
 </html>

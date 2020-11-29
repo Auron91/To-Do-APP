@@ -104,20 +104,6 @@ const toggleEditPanel = () => {
     editPanelState = editPanelState? false : true;
 }
 
-// logout
-// const logout = async () => {
-//     try {
-//         await fetch('/users/logoutAll', {
-//             method: 'POST',
-//             headers: {
-//                 'Authorization': `Bearer ${token}`,
-//                 'Content-Type': 'application/json'
-//             }
-//         })
-//     } catch (e) {
-//         throw new Error (e)
-//     }
-// }
 // Event Listeners
 tasks.addEventListener('click', toggleTask);
 addBtn.addEventListener('click', createTask);

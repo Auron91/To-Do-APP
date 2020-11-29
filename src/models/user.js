@@ -7,7 +7,7 @@ const Task = require('./task')
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: [true, 'Please enter name'],
         trim: true
     },
     email: {
@@ -21,22 +21,13 @@ const userSchema = new mongoose.Schema({
     age: {
         type: Number,
         default: 0,
-        validate(value) {
-            if (value < 0) {
-                throw new Error('Age must be a positive number')
-            }
-        }
+        min: [0, 'Age must be positive number']
     },
     password: {
         type: String,
         required: [true, 'Please enter password'],
         trim: true,
-        minlength: [6, 'Minimum password length is 6 characters'],
-        validate(value){
-            if (value.toLowerCase().includes('password')) {
-                throw new Error("Password can't have 'password' text inside")
-            }
-        }
+        minlength: [6, 'Minimum password length is 6 characters']
     },
     tokens: [{
         token: {

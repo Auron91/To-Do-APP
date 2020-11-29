@@ -5,6 +5,7 @@ require('./db/mongoose')
 const cookieParser = require('cookie-parser')
 const userRouter = require('./routers/user')
 const taskRouter = require('./routers/task')
+const { checkUser } = require('./middleware/auth')
 
 const app = express()
 const port = process.env.PORT
@@ -27,8 +28,15 @@ app.set('views', viewsPath)
 hbs.registerPartials(partialsPath)
 
 // index page route
+
+app.get('*', checkUser)
+
 app.get('/', (req, res) => {
-    res.render('index')
+    if(req.cookies.jwt) {
+        res.redirect('/main')
+    } else {
+        res.render('index')
+    }
 })
 
 app.get('/signup', (req, res) => {
@@ -41,7 +49,11 @@ app.get('/login', (req, res) => {
 
 app.get('/logout', (req, res) => {
     res.cookie('jwt', "", {httpOnly: true, maxAge: 1})
-    res.render('index')
+    res.redirect('/')
+})
+
+app.get('/userprofile', (req, res) => {
+    res.render('userProfile')
 })
 
 app.get('/main', (req, res) => {
